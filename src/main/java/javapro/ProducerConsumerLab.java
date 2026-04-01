@@ -39,50 +39,51 @@ public class ProducerConsumerLab {
         }
     }
 
-    /**
-     * TODO 1: Implement Producer class
-     * Create a class that implements Runnable and:
-     * 1. Has a private SharedBuffer field
-     * 2. Has a constructor that accepts SharedBuffer parameter
-     * 3. In run() method:
-     *    - Use try-catch for InterruptedException
-     *    - Loop 10 times (i from 0 to 9)
-     *    - Call buffer.produce(i) each iteration
-     *    - Print "[Producer] finished producing 10 items" when done
-     *    - In catch block, print "[Producer] was interrupted"
-     */
     static class Producer implements Runnable {
-        // TODO 1: Implement Producer class here
-        // Step 1: Add private SharedBuffer field
-
-        // Step 2: Add constructor
+        private SharedBuffer b;
         public Producer(SharedBuffer buffer) {
-            // Initialize the buffer field
+            b = buffer;
         }
 
-        // Step 3: Implement run() method
         @Override
         public void run() {
-            // Add your implementation here
+            try
+            {
+              for (int i = 0; i < 10; i++)
+              {
+                b.produce(i);
+              }
+              System.out.println("[Producer] finished producing 10 items");
+            }
+            catch (InterruptedException e)
+            {
+              System.out.println("[Producer] was interrupted");
+              e.printStackTrace();
+            }
         }
     }
 
-    /**
-     * TODO 2: Implement Consumer class
-     */
     static class Consumer implements Runnable {
-        // TODO 2: Implement Consumer class here
-        // Step 1: Add private SharedBuffer field
-
-        // Step 2: Add constructor
+        private SharedBuffer b;
         public Consumer(SharedBuffer buffer) {
-            // Initialize the buffer field
+            b = buffer;
         }
 
-        // Step 3: Implement run() method
         @Override
         public void run() {
-            // Add your implementation here
+            try
+            {
+              for (int i = 0; i < 10; i++)
+              {
+                b.consume();
+              }
+              System.out.println("[Consumer] finished consuming 10 items");
+            }
+            catch (InterruptedException e)
+            {
+              System.out.println("[Consumer] was interrupted");
+              e.printStackTrace();
+            }
         }
     }
 
